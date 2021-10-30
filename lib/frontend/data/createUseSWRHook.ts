@@ -16,7 +16,16 @@ export default function createUseSWRHook<APIResponseType, SWRKeyOptions>(
   return function (options){
     // Inject Next.js router so we can use router.query, etc
     const router = useRouter()
-    const keyWrapper = () => key({ router, options })
+
+    // TODO: Make functional so we don't mutate here.
+    let keyWrapper
+    // TODO: Fix Typescript type stuff so it knows `getQueryFromRouter` is a default option
+    if ('getQueryFromRouter' in options && options.getQueryFromRouter) {
+    }
+
+    else {
+      keyWrapper = () => key({ router, options })
+    }
 
     // swr will attempt to execute our key function. If our key function returns
     // null swr will not attempt an API call.

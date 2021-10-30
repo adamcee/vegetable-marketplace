@@ -22,5 +22,6 @@ export const ListingAPIResource: APIResource<Listing, KeyOptions> = {
   defaultSWRKeyOptions: {
     getQueryFromRouter: true,
     requiredParams: ['id'],
+    apiPathname: '/api/listings/[id]',
   }
 }

@@ -22,11 +22,12 @@ export type GetSWRKey<SWRKeyOptions> = ({
 }) => string | null
 
 export interface DefaultSWRKeyOptions {
-  // TODO: bundle `getQueryFromRouter` and `requiredParams` into a single obj b/c they
+  // TODO: bundle the queryFromRouter stuff into a single obj b/c they
   // both always go together
   // Get query param vals for API route from Next.js router.query
   getQueryFromRouter?: boolean
   requiredParams?: string[]
+  apiPathname: string
   [key: string]: any
 }
 
