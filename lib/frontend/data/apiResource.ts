@@ -21,6 +21,15 @@ export type GetSWRKey<SWRKeyOptions> = ({
   getQueryFromRouter?: boolean
 }) => string | null
 
+export interface DefaultSWRKeyOptions {
+  // Get query param vals for API route from Next.js router.query
+  getQueryFromRouter?: boolean
+  // TODO: Rename `mustBeTruthy` to something more specific ...
+  // All query param vals must be truthy
+  mustBeTruthy?: true
+  [key: string]: string|boolean|number|undefined
+}
+
 /**
  * Represents some resource accessible by API.
  * Usually the API will be a Next.js Page API.
@@ -33,6 +42,7 @@ export type GetSWRKey<SWRKeyOptions> = ({
 
 export interface APIResource<APIResponseType, SWRKeyOptions> {
   useSWRHook: UseSWRHook<APIResponseType, SWRKeyOptions>
+  defaultSWRKeyOptions?: DefaultSWRKeyOptions
 }
 
 /**

@@ -1,5 +1,5 @@
 import { Listing } from '.prisma/client'
-import { APIResource, GetSWRKey } from './apiResource'
+import { APIResource, DefaultSWRKeyOptions, GetSWRKey } from './apiResource'
 import createUseSWRHook from './createUseSWRHook'
 
 /**
@@ -7,7 +7,7 @@ import createUseSWRHook from './createUseSWRHook'
  * /api/listings
  */
 
-export interface KeyOptions {
+export interface KeyOptions extends DefaultSWRKeyOptions {
   myListings?: boolean
 }
 

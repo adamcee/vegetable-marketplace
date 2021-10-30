@@ -4,40 +4,40 @@ import { APIResource } from '../../lib/frontend/data/apiResource'
 import ErrorHandler from '../common/ErrorHandler'
 import Loader from '../common/Loader'
 
-interface ResourceControllerProps {
+// TODO: Figure out how to preserve type information or PropType information for swrKeyOptions
+
+interface APIResourceController {
   resource: APIResource<any, any>
   successView: (data: any) => JSX.Element
   loadingView: () => JSX.Element
   errorView: (error: Error) => JSX.Element
-  swrKeyOptions: any
-  getQueryFromRouter: boolean
+  swrKeyOptions?: any
 }
 
-ResourceController.propTypes = {
-  // TODO: Add shape
+APIResourceController.propTypes = {
+  // TODO: Add shape to resource propType?
   resource: PropTypes.object,
   swrKeyOptions: PropTypes.object,
-  successView: PropTypes.node.isRequired,
-  loadingView: PropTypes.node,
-  errorView: PropTypes.node,
-  getQueryFromRouter: PropTypes.bool,
+  successView: PropTypes.func.isRequired,
+  loadingView: PropTypes.func,
+  errorView: PropTypes.func,
 }
 
-ResourceController.defaultProps = {
+APIResourceController.defaultProps = {
   loadingView: Loader,
   errorView: ErrorHandler,
+  swrKeyOptions: {},
 }
 
-export default function ResourceController({
+export default function APIResourceController({
   swrKeyOptions,
-  getQueryFromRouter,
   errorView,
   loadingView,
   resource,
   successView,
-}: ResourceControllerProps) {
+}: APIResourceController) {
   // Pass swrKeyOptions to getKey function for swr
-  const { data, error } = resource.useSWRHook(swrKeyOptions, getQueryFromRouter)
+  const { data, error } = resource.useSWRHook({ ...swrKeyOptions, ...resource.defaultSWRKeyOptions })
 
   const renderLoadingView = () => !loadingView ? <Loader/> : loadingView()
 

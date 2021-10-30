@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import type { NextPage } from 'next'
-import ConnectedListingList from '../components/listing/ConnectedListingList';
+import ListingsResourceController from '../components/listing/ListingsResourceController';
 
 const Home: NextPage = () => {
     return (
@@ -9,7 +9,7 @@ const Home: NextPage = () => {
       <Typography variant="h3" gutterBottom>
         Available Veggies
       </Typography>
-      <ConnectedListingList swrKeyOptions={{}} getQueryFromRouter={true} />
+      <ListingsResourceController />
     </Box>
   )
 }

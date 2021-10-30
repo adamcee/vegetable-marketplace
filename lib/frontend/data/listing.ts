@@ -1,6 +1,6 @@
 import { Listing } from '.prisma/client'
 import { NextRouter } from 'next/router';
-import { APIResource, GetSWRKey } from './apiResource';
+import { APIResource, DefaultSWRKeyOptions, GetSWRKey } from './apiResource';
 import createUseSWRHook from './createUseSWRHook'
 
 /**
@@ -8,9 +8,7 @@ import createUseSWRHook from './createUseSWRHook'
  * api/listing/[id]
  */
 
-export interface KeyOptions {
-  foo?: string
-}
+export interface KeyOptions extends DefaultSWRKeyOptions {}
 
 // TODO - This is a use case where the `getQueryFromRouter` flag should have `createUseSWRHook` function
 // automatically do this work for us.
@@ -21,4 +19,8 @@ const swrKey: GetSWRKey<KeyOptions> = ({ router }) => {
 
 export const ListingAPIResource: APIResource<Listing, KeyOptions> = {
   useSWRHook: createUseSWRHook<Listing, KeyOptions>(swrKey),
+  defaultSWRKeyOptions: {
+    getQueryFromRouter: true,
+    mustBeTruthy: true,
+  }
 }

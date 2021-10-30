@@ -2,7 +2,7 @@ import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import type { NextPage } from 'next'
 import { NextLinkComposed } from '../components/common/Link'
-import ConnectedListingList from '../components/listing/ConnectedListingList'
+import ListingsResourceController from '../components/listing/ListingsResourceController';
 
 const Dashboard: NextPage = () => {
   return (
@@ -13,7 +13,7 @@ const Dashboard: NextPage = () => {
       <Typography variant="h6" gutterBottom>
         My listings
       </Typography>
-      <ConnectedListingList swrKeyOptions={{ myListings: true }} getQueryFromRouter={false} />
+      <ListingsResourceController myListings={true} />
       <Button sx={{ my: 4 }} component={NextLinkComposed} to={'/createListing'} variant="contained">
         Create new listing
       </Button>
