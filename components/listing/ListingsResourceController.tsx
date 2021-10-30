@@ -6,7 +6,7 @@ import ListingList from './ListingList'
 interface Props extends KeyOptions {}
 
 const ListingsResourceController = ({ myListings }: Props) => {
-  const SuccessView = (data: any) => <ListingList data={data} />
+  const SuccessView = (data: any) => <ListingList listings={data} />
 
   return (
     <Box m={4}>

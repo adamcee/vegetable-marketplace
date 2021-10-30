@@ -2,17 +2,16 @@ import { Listing } from '.prisma/client'
 import { Card, CardActionArea, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import {NextLinkComposed} from "../common/Link";
-import { ResourceViewProps, RESOURCE_VIEW_PROP_TYPES } from '../../lib/frontend/data/apiResource';
 
-interface Props extends ResourceViewProps {
-  data: Listing
+interface Props {
+  listing: Listing
 }
 
 // TODO: Investigate editor error message "Property 'priceInCentsPerUnit' does not exist on type 'Listing'."
 // Coming from where we attempt to display listing.priceInCentsPerUnit.
 // Currently priceInCentsPerUnit doesn't exist in the schema.
 
-export default function ListingCard({ data: listing }: Props) {
+export default function ListingCard({ listing }: Props) {
   console.log(listing)
   return (
       <Card>
@@ -26,5 +25,3 @@ export default function ListingCard({ data: listing }: Props) {
       </Card>
   )
 }
-
-ListingCard.propTypes = RESOURCE_VIEW_PROP_TYPES;

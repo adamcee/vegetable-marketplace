@@ -5,7 +5,7 @@ import ListingCard from '../../components/listing/ListingCard';
 import { ListingAPIResource } from '../../lib/frontend/data/listing';
 
 const Listing: NextPage = () => {
-    const SuccessView = (data: any) => <ListingCard data={data}/>
+    const SuccessView = (data: any) => <ListingCard listing={data}/>
 
     return (
         <Box m={4}>
