@@ -1,6 +1,6 @@
 import { Listing } from '.prisma/client'
-import { APIResource, SWRKey } from './apiResource';
-import createUseSWRHook from './createUseSWRHook';
+import { APIResource, GetSWRKey } from './apiResource'
+import createUseSWRHook from './createUseSWRHook'
 
 /**
  * Listings
@@ -8,16 +8,17 @@ import createUseSWRHook from './createUseSWRHook';
  */
 
 export interface KeyOptions {
-    myListings?: boolean
+  myListings?: boolean
 }
 
-const getListingsKey: SWRKey<KeyOptions> = ({ myListings }: KeyOptions) => {
-    const queryParams = myListings ? '?myListings=true' : ''
-    const key = `/api/listings${queryParams}`
-    console.log('key is ', key)
-    return key
+const getListingsKey: GetSWRKey<KeyOptions> = ({ router, options }) => {
+  const { myListings } = options
+  const queryParams = myListings ? '?myListings=true' : ''
+  const key = `/api/listings${queryParams}`
+  console.log('key is ', key)
+  return key
 }
 
 export const ListingsAPIResource: APIResource<Listing[], KeyOptions> = {
-    useSWRHook: createUseSWRHook<Listing[], KeyOptions>(getListingsKey),
+  useSWRHook: createUseSWRHook<Listing[], KeyOptions>(getListingsKey),
 }

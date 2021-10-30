@@ -2,10 +2,10 @@ import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import type { NextPage } from 'next'
 import { NextLinkComposed } from '../components/common/Link'
-import ConnectedListingList from '../components/listing/ConnectedListingList';
+import ConnectedListingList from '../components/listing/ConnectedListingList'
 
 const Dashboard: NextPage = () => {
-    return (
+  return (
     <Box m={4}>
       <Typography variant="h3" gutterBottom>
         My Dashboard
@@ -13,8 +13,7 @@ const Dashboard: NextPage = () => {
       <Typography variant="h6" gutterBottom>
         My listings
       </Typography>
-      { /* note that `options` prop has correct typing info for its object shape */ }
-      <ConnectedListingList options={{ myListings: true }}/>
+      <ConnectedListingList swrKeyOptions={{ myListings: true }} getQueryFromRouter={false} />
       <Button sx={{ my: 4 }} component={NextLinkComposed} to={'/createListing'} variant="contained">
         Create new listing
       </Button>

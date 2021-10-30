@@ -7,10 +7,19 @@
  * where this code may be called but route param/slug does not yet exist.
  * We can return `null` for the key value and SWR will know to not yet execute an AJAX request to the API to get data.
  **/
+import { NextRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import { UseSWRHook } from './createUseSWRHook'
 
-export type SWRKey<SWRKeyOptions> = (option: SWRKeyOptions) => string | null
-export type UseSWRHook<APIResponseType, SWRKeyOptions> = (options: SWRKeyOptions) => { data: APIResponseType | undefined, error: Error | undefined }
+export type GetSWRKey<SWRKeyOptions> = ({
+  router,
+  options,
+  getQueryFromRouter,
+}: {
+  router?: NextRouter
+  options: SWRKeyOptions
+  getQueryFromRouter?: boolean
+}) => string | null
 
 /**
  * Represents some resource accessible by API.
@@ -23,10 +32,8 @@ export type UseSWRHook<APIResponseType, SWRKeyOptions> = (options: SWRKeyOptions
  */
 
 export interface APIResource<APIResponseType, SWRKeyOptions> {
-    useSWRHook: UseSWRHook<APIResponseType, SWRKeyOptions>
-    injectRouter?: boolean
+  useSWRHook: UseSWRHook<APIResponseType, SWRKeyOptions>
 }
-
 
 /**
  * Required propTypes for a component used as a "Resource View"
@@ -38,10 +45,10 @@ export interface APIResource<APIResponseType, SWRKeyOptions> {
  * It's parent component should handle loading/error logic and associated views.
  */
 export interface ResourceViewProps {
-    // The view's parent component must manage loading/error states, etc.
-    data: any
+  // The view's parent component must manage loading/error states, etc.
+  data: any
 }
 
 export const RESOURCE_VIEW_PROP_TYPES = {
-    data: PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
 }

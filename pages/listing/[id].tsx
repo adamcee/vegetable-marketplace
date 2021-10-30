@@ -1,12 +1,16 @@
 import { Box } from '@mui/system'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router';
 import ConnectedListing from '../../components/listing/ConnectedListingCard';
 
 const Listing: NextPage = () => {
+    const router = useRouter()
+    console.log('router asPath ', router.asPath)
+    console.log('router query ', router.query)
+    console.log('router ', router)
     return (
         <Box m={4}>
-            {/* @ts-ignore . For now we just have to add ts-ignore when we know `options` prop not required */}
-            <ConnectedListing />
+            <ConnectedListing swrKeyOptions={{}} getQueryFromRouter={true} />
         </Box>
     )
 }
