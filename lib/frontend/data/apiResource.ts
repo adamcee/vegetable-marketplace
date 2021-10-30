@@ -1,5 +1,3 @@
-import { NextRouter } from 'next/router';
-
 /**
  * We use a function to get the SWR key so that we can implement SWR conditional fetching.
  * If key is null swr does not make API call; this is a feature
