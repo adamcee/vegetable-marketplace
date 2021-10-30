@@ -18,7 +18,6 @@ export default function connectToAPI<ViewComponentProps, SWRKeyOptions>(ViewComp
 
 
     // Type info for the `swrKeyOptions` prop which ConnectedComponent will have.
-    // Example: <MyConnectedComponent swrKeyOptions={{ mustBeTruthy: true }} />
     interface DefaultConnectedComponentProps {
         // Make required b/c its hard to programmatically set this. Better to be required
         // and be an empty object than to forget it when it is needed.

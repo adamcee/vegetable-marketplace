@@ -21,6 +21,6 @@ export const ListingAPIResource: APIResource<Listing, KeyOptions> = {
   useSWRHook: createUseSWRHook<Listing, KeyOptions>(swrKey),
   defaultSWRKeyOptions: {
     getQueryFromRouter: true,
-    mustBeTruthy: true,
+    requiredParams: ['id'],
   }
 }

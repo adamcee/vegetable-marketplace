@@ -22,12 +22,12 @@ export type GetSWRKey<SWRKeyOptions> = ({
 }) => string | null
 
 export interface DefaultSWRKeyOptions {
+  // TODO: bundle `getQueryFromRouter` and `requiredParams` into a single obj b/c they
+  // both always go together
   // Get query param vals for API route from Next.js router.query
   getQueryFromRouter?: boolean
-  // TODO: Rename `mustBeTruthy` to something more specific ...
-  // All query param vals must be truthy
-  mustBeTruthy?: true
-  [key: string]: string|boolean|number|undefined
+  requiredParams?: string[]
+  [key: string]: any
 }
 
 /**
@@ -43,22 +43,4 @@ export interface DefaultSWRKeyOptions {
 export interface APIResource<APIResponseType, SWRKeyOptions> {
   useSWRHook: UseSWRHook<APIResponseType, SWRKeyOptions>
   defaultSWRKeyOptions?: DefaultSWRKeyOptions
-}
-
-/**
- * Required propTypes for a component used as a "Resource View"
- *
- * A "Resource View" is any component which actually does the rendering of data
- * once the data is successfully received from an APIResource.
- *
- * IMPORTANT - a view should _only_ be rendered when data already exists.
- * It's parent component should handle loading/error logic and associated views.
- */
-export interface ResourceViewProps {
-  // The view's parent component must manage loading/error states, etc.
-  data: any
-}
-
-export const RESOURCE_VIEW_PROP_TYPES = {
-  data: PropTypes.any.isRequired,
 }
