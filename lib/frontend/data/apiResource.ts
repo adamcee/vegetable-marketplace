@@ -7,6 +7,7 @@
  * where this code may be called but route param/slug does not yet exist.
  * We can return `null` for the key value and SWR will know to not yet execute an AJAX request to the API to get data.
  **/
+import PropTypes from 'prop-types'
 
 export type SWRKey<SWRKeyOptions> = (option: SWRKeyOptions) => string | null
 export type UseSWRHook<APIResponseType, SWRKeyOptions> = (options: SWRKeyOptions) => { data: APIResponseType | undefined, error: Error | undefined }
@@ -24,4 +25,23 @@ export type UseSWRHook<APIResponseType, SWRKeyOptions> = (options: SWRKeyOptions
 export interface APIResource<APIResponseType, SWRKeyOptions> {
     useSWRHook: UseSWRHook<APIResponseType, SWRKeyOptions>
     injectRouter?: boolean
+}
+
+
+/**
+ * Required propTypes for a component used as a "Resource View"
+ *
+ * A "Resource View" is any component which actually does the rendering of data
+ * once the data is successfully received from an APIResource.
+ *
+ * IMPORTANT - a view should _only_ be rendered when data already exists.
+ * It's parent component should handle loading/error logic and associated views.
+ */
+export interface ResourceViewProps {
+    // The view's parent component must manage loading/error states, etc.
+    data: any
+}
+
+export const RESOURCE_VIEW_PROP_TYPES = {
+    data: PropTypes.any.isRequired,
 }

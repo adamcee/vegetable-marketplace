@@ -1,8 +1,9 @@
 import { Listing } from '.prisma/client'
 import { Stack } from '@mui/material'
 import ListingCard from './ListingCard'
+import { ResourceViewProps } from '../../lib/frontend/data/apiResource';
 
-interface Props {
+interface Props extends ResourceViewProps {
   data: Listing[] | undefined
 }
 

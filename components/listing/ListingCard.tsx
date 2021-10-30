@@ -2,8 +2,9 @@ import { Listing } from '.prisma/client'
 import { Card, CardActionArea, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import {NextLinkComposed} from "../common/Link";
+import { ResourceViewProps, RESOURCE_VIEW_PROP_TYPES } from '../../lib/frontend/data/apiResource';
 
-interface Props {
+interface Props extends ResourceViewProps {
   data: Listing
 }
 
@@ -25,3 +26,5 @@ export default function ListingCard({ data: listing }: Props) {
       </Card>
   )
 }
+
+ListingCard.propTypes = RESOURCE_VIEW_PROP_TYPES;
