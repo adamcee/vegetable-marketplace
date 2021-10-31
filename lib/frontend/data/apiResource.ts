@@ -8,7 +8,6 @@
  * We can return `null` for the key value and SWR will know to not yet execute an AJAX request to the API to get data.
  **/
 import { NextRouter } from 'next/router'
-import PropTypes from 'prop-types'
 import { UseSWRHook } from './createUseSWRHook'
 
 export type GetSWRKey<SWRKeyOptions> = ({
@@ -27,7 +26,7 @@ export interface DefaultSWRKeyOptions {
   // Get query param vals for API route from Next.js router.query
   getQueryFromRouter?: boolean
   requiredParams?: string[]
-  apiPathname: string
+  apiPathname?: string
   [key: string]: any
 }
 

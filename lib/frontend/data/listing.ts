@@ -26,8 +26,7 @@ const swrKeyWrapper = ({
   paramsToAppend?: QueryParam[]
   router: NextRouter
 }) => {
-  const path = apiPathname || router.pathname
-  // TODO: Check if path already has `?`. Check if it has ampersand at end or not.
+  // TODO: Check if apiPathName already has `?`. Check if it has ampersand at end or not.
   const { query } = router
   // TODO: If query.hasOwnProperty(someRequiredParamKey) is false, we return null - key returns null
 }
@@ -44,6 +43,7 @@ export const ListingAPIResource: APIResource<Listing, KeyOptions> = {
   defaultSWRKeyOptions: {
     getQueryFromRouter: true,
     requiredParams: ['id'],
+    // TODO: Add some sort of validation here so we can't mess it up? See what Next.js does
     apiPathname: '/api/listings/[id]',
   },
 }

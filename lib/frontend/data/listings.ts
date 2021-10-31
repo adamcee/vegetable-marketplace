@@ -21,4 +21,7 @@ const getListingsKey: GetSWRKey<KeyOptions> = ({ router, options }) => {
 
 export const ListingsAPIResource: APIResource<Listing[], KeyOptions> = {
   useSWRHook: createUseSWRHook<Listing[], KeyOptions>(getListingsKey),
+  defaultSWRKeyOptions: {
+    apiPathname: '/api/listings',
+  },
 }
